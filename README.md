@@ -2,14 +2,14 @@
 
 Bring your javascript files together. In a peaceful way.
 
-** STOP **
+**STOP**
 
 * Writing massive, single file jquery plugins
 * Writing the same (function(window) { })(window); closure around everything
 * Worrying about supporting all those other loaders and strange systems
 * Thinking that there is no other way!
 
-** START **
+**START**
 
 * Using multiple files for your javascript projects
 * Realizing that your source files don't have to be your distributed files
