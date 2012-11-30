@@ -1,0 +1,63 @@
+#!/usr/bin/env ruby
+
+require 'reunion'
+
+kClientPath = File.join(File.dirname(__FILE__), '..', 'client', 'require.js')
+
+# user input
+filearg = ARGV[0]
+
+if !filearg then
+    puts 'file argument required'
+    exit -1
+end
+
+filename = File.expand_path(filearg)
+
+def render(deps, ids)
+    flat = Hash.new
+
+    deps.each do |dep|
+        id = dep['id']
+        path = dep['path']
+
+        real_id = ids[path]
+        if real_id then
+            puts 'require.alias' + real_id + ':' + id if real_id != id
+            next
+        end
+
+        real_id = ids[path] = id
+
+        # render children first
+        render(dep['deps'], ids)
+
+        src = File.read(path)
+        puts 'require.m[\'' + real_id + '\'] = function(module, exports) {'
+        puts src
+        puts '};'
+    end
+end
+
+## rendering ##
+
+puts '(function(window) {';
+puts 'var global = window;';
+require_src = File.read(kClientPath)
+
+puts require_src
+
+deps = required(filename)
+
+ids = Hash.new
+ids[filename] = '__main__'
+render(deps, ids)
+
+puts 'require.m[\'__main__\'] = function(module, exports) {'
+puts File.read(filename)
+puts '};'
+
+puts 'return require(\'__main__\');'
+puts '})(window);'
+
+# vim: ft=ruby
