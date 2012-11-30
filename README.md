@@ -16,7 +16,7 @@ Bring your javascript files together. In a peaceful way.
 * Use simple common.js require syntax since you wanted a single file anyway
 * Making it easier to maintain your javascript code.
 * No setup required. No package.json required
-* Using reunion today!
+* Saying **NO** to poor client side organization in *your* repos and start using reunion today!
 
 ## install ##
 
@@ -52,7 +52,7 @@ More examples as I make them :)
 
 Users making more extensive use of npm modules for their client side development should check out the following projects:
 
-* [script](https://github.com/shtylman/script)
+* [script](https://github.com/shtylman/node-script)
 * [browserify](https://github.com/substack/browserify)
 * [component](https://github.com/component/component)
 
