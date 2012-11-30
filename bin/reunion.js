@@ -114,11 +114,6 @@ required(file, function(err, deps) {
 
     out.write(fs.readFileSync(client_dir + '/require.js', 'utf-8'));
 
-    // add aliases support if needed
-    if (aliases.length > 0) {
-        //out.write(fs.readFileSync(client_dir + '/alias.js', 'utf-8'));
-    }
-
     final.forEach(function(filename) {
         var id = ids[filename];
 
