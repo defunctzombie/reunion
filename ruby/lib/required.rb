@@ -12,12 +12,12 @@ def required(filename)
         idx_path = File.join(path, 'index.js')
         path += '.js' if File.extname(path).empty?
 
-        dep = Hash.new
-        dep['id'] = req_id
-
         # try to load index path if regular doesn't exit
         path = idx_path if !File.exists? path
 
+        dep = Hash.new
+
+        dep['id'] = req_id
         dep['path'] = path
         dep['deps'] = required(path)
 
