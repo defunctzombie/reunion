@@ -97,6 +97,25 @@ Take a look at the following projects which I have ported to use reunion. Look a
 
 Try porting over some of your small projects/client side libs! Super simple. If you want help porting, just ask :)
 
+## makefile magic ##
+
+Add the following snippets of code to your `makefile` to build your distribution files.
+
+```makefile
+# `make dist` to package for distribution, deps do the rest
+dist: dist/awesome_lib.min.js
+
+# assuming your main source file lives at `awesome_lib.js` in the project root
+dist/awesome_lib.js: awesome_lib.js
+    reunion --ns awesome_lib $< > $@
+
+# minification courtesy of googlz
+dist/awesome_lib.min.js: dist/awesome_lib.js
+    url --data-urlencode "js_code@$<" \
+        -d "output_info=compiled_code&compilation_level=SIMPLE_OPTIMIZATIONS" \
+        http://closure-compiler.appspot.com/compile > $@
+```
+
 ## advanced ##
 
 Users making more extensive use of npm modules for their client side development should check out the following projects:
