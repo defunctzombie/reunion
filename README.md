@@ -39,14 +39,63 @@ reunion /path/to/your/client/lib.js > /path/to/your/client/dist/lib.js
 
 That's it! Reunion will output to stdout your lib.js as well as include any local "dependencies" found through your "require" calls.
 
+## commonjs requires in 2 seconds ##
+
+Basic Premise: Files are modules. `module.exports` exposes what you want to share.
+
+foo.js (main project file)
+```javascript
+// set local variable bar to the "module" bar.js (no extension needed)
+// this variable can be called anything (usually similar to the string modulename for sanity)
+var bar = require('./bar');
+
+// we can now access anything in bar we exported
+bar.say();
+bar.my_constant;
+
+// by default, the module.exports is an empty object {}
+// you can override it with any other valid js type (object, function, string, etc...)
+module.exports = function() {
+    return bar.say() + bar.my_constant;
+};
+
+// since we don't export this, this variable is private to the file (our "module")
+var private;
+```
+
+bar.js (lives next to foo.js)
+```javascript
+// if your require a directory
+// the resolver will look for an index.js file and load that as the "module"
+var baz = require('./foobar');
+
+// this is the same thing as above
+var baz = require('./foobar/index');
+
+module.exports.say = function() {
+    ...
+};
+
+module.exports.my_constant = 42;
+```
+
+index.js (in a folder called `foobar` next to foo.js)
+```javascript
+var Cat = function() {};
+
+Cat.prototype = ...
+
+module.exports = Cat;
+```
+
 ## examples ##
 
-Take a look at the following projects which I have updated to use reunion. Look at how much easier the code is to read, follow, and maintain!
+Take a look at the following projects which I have ported to use reunion. Look at how much easier the code is to read, follow, and maintain!
 
 * [jquery-qrcode](https://github.com/shtylman/jquery-qrcode)
 * [bintrees](https://github.com/shtylman/js_bintrees)
 
-More examples as I make them :)
+Try porting over some of your small projects/client side libs! Super simple. If you want help porting, just ask :)
 
 ## advanced ##
 
