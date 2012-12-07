@@ -122,5 +122,4 @@ Users making more extensive use of npm modules for their client side development
 
 * [script](https://github.com/shtylman/node-script)
 * [browserify](https://github.com/substack/browserify)
-* [component](https://github.com/component/component)
 
