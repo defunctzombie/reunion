@@ -75,6 +75,10 @@ required(file, function(err, deps) {
     // from -> to objects
     var aliases = [];
 
+    // aliases we have already added
+    // from -> to
+    var seen_aliases = {};
+
     Object.keys(flat).forEach(function(fullname) {
         final.push(fullname);
 
@@ -91,10 +95,15 @@ required(file, function(err, deps) {
             if (curr === id) {
                 return;
             }
+            else if (seen_aliases[id] === curr) {
+                return;
+            }
+
+            seen_aliases[id] = curr;
 
             aliases.push({
-                from: curr,
-                to: id
+                from: id,
+                to: curr
             });
         });
     });
