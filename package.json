@@ -1,6 +1,6 @@
 {
   "name": "reunion",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Bring your javascript files together. In a peaceful way.",
   "main": "index.js",
   "repository": "",
