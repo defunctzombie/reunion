@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "required": "0.0.8",
-    "merge": "1.0.0",
+    "merge": "1.2.1",
     "optimist": "0.3.5"
   }
 }
